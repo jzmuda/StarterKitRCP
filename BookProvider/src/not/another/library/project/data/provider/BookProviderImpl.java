@@ -33,8 +33,9 @@ public class BookProviderImpl implements BookProvider {
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	private final CloseableHttpClient client= HttpClients.createDefault();
 	private RequestConfig requestConfig;
-	public BookProviderImpl(String url) throws IOException {
-		checkConnection(url);
+	public BookProviderImpl(String givenUrl) throws IOException {
+		givenUrl=unNull(givenUrl);
+		checkConnection(givenUrl);
 		requestConfig = RequestConfig.custom()
 				.setSocketTimeout(1000)
 				.setConnectTimeout(1000)
@@ -42,7 +43,6 @@ public class BookProviderImpl implements BookProvider {
 	}
 	@Override
 	public List<BookVo> findBooks(String authors, String title) throws IOException {
-		//we do not like null values, let empty be default
 		title = unNull(title);
 		authors = unNull(authors);
 
@@ -67,7 +67,7 @@ public class BookProviderImpl implements BookProvider {
 
 	@Override
 	public void addBook(String author, String title, BookStatusVo status) throws IOException {
-		BookVo book = new BookVo(0L,author,title,status);
+		BookVo book = new BookVo(0L,unNull(author),unNull(title),status);
 		add(book);		
 	}
 
@@ -129,7 +129,7 @@ public class BookProviderImpl implements BookProvider {
 		return extractBook(inputStream, constructCollectionType);
 	}
 
-	private List<BookVo> extractBook(InputStream inputStream, CollectionType constructCollectionType) throws IOException {
+	private ArrayList<BookVo> extractBook(InputStream inputStream, CollectionType constructCollectionType) throws IOException {
 		Object value = objectMapper.readValue(inputStream, constructCollectionType);	
 		return value instanceof ArrayList ?   (ArrayList<BookVo>) value:new ArrayList<BookVo>();
 	}

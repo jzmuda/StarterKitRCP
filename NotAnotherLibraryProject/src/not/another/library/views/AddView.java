@@ -100,12 +100,6 @@ public class AddView extends ViewPart {
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				saveChanges();
-				if(problem.isEmpty()) {
-					showSuccessMessageBox();
-				}
-				else {
-					showErrorMessageBox();
-				}
 			}
 		});
 
@@ -181,6 +175,10 @@ public class AddView extends ViewPart {
 		//job.setSystem(true);
 		job.setPriority(Job.SHORT);
 		job.schedule(); // start as soon as possible
+		waitForResponse();
+	}
+
+	private void waitForResponse() {
 		int i =0;
 		while(problem.isEmpty() && ! (problem == null) && i<1000) {
 			lblBunnies.setText(""+i);

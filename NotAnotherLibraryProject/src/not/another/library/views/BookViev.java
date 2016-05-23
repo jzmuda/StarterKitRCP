@@ -182,6 +182,10 @@ public class BookViev extends ViewPart {
 		IBeanValueProperty[] values = BeanProperties.values(columnNames);
 		ViewerSupport.bind(tableViewer, bookList, values);
 
+		addTableMenu();
+	}
+
+	private void addTableMenu() {
 		Menu menu = new Menu(table);
 		table.setMenu(menu);
 
@@ -284,10 +288,15 @@ public class BookViev extends ViewPart {
 		//job.setSystem(true);
 		job.setPriority(Job.SHORT);
 		job.schedule(); // start as soon as possible
-		int i =0;
 		/**
 		 * Make the APP GUI do something until the job finishes.
 		 */
+		waitForResponse();
+	}
+
+	private void waitForResponse() {
+		int i =0;
+		
 		while(problem.isEmpty()) {
 			lblBunnies.setText("Bunnies:"+i);
 			try {

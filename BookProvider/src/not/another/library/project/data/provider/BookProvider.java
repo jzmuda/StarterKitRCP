@@ -32,7 +32,7 @@ public interface BookProvider {
 	 * Deletes o book with given ID
 	 * @param ID
 	 * @throws IOException
-	 * if DELTE request fails
+	 * if DELETE request fails
 	 */
 	public void deleteBook(Long ID) throws IOException;
 	/**
@@ -50,7 +50,7 @@ public interface BookProvider {
 	 * @param title
 	 * @param status
 	 * @throws IOException
-	 * when POST request fails
+	 * when DELETE or POST request fails
 	 */
 	public void addBook(BookVo book) throws IOException;
 	/**
@@ -58,6 +58,7 @@ public interface BookProvider {
 	 * @param authors
 	 * @param title
 	 * @return
+	 * list of books matching the search criteria
 	 * @throws IOException
 	 * when GET request fails
 	 */

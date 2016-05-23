@@ -63,26 +63,42 @@ public class AddBookDialog  extends Dialog {
 		area.setLayout(new GridLayout(2, false));
 		new Label(area, SWT.NONE);
 
-		Label lblAuthors = new Label(area, SWT.NONE);
-		lblAuthors.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblAuthors.setText("Authors");
+		initializeLabels(area);
 
+		initializeText(area);
+
+		
+
+		initialiteCCombo(area);
+		addEditListeners();
+		return area;
+	}
+
+
+	private void initializeText(Composite area) {
 		txtAuthors = new Text(area, SWT.BORDER);
 		txtAuthors.setText("");
 		txtAuthors.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
-		Label lblTitle = new Label(area, SWT.NONE);
-		lblTitle.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblTitle.setText("Title");
-
 		txtTitle = new Text(area, SWT.BORDER);
 		txtTitle.setText("");
 		txtTitle.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+	}
 
+
+	private void initializeLabels(Composite area) {
+		Label lblAuthors = new Label(area, SWT.NONE);
+		lblAuthors.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblAuthors.setText("Authors");
+		Label lblTitle = new Label(area, SWT.NONE);
+		lblTitle.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblTitle.setText("Title");
 		Label lblStatus = new Label(area, SWT.NONE);
 		lblStatus.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblStatus.setText("Status");
+	}
 
+
+	private void initialiteCCombo(Composite area) {
 		combo = new CCombo(area, SWT.BORDER);
 		combo.setEditable(false);
 		combo.add(status[0]);
@@ -90,8 +106,6 @@ public class AddBookDialog  extends Dialog {
 		combo.add(status[2]);
 		combo.setVisibleItemCount(3);
 		combo.select(0);
-		addEditListeners();
-		return area;
 	}
 
 

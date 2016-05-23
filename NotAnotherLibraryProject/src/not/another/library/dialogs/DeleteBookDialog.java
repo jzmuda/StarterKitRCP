@@ -64,6 +64,9 @@ public class DeleteBookDialog   extends TitleAreaDialog {
 		//job.setSystem(true);
 		job.setPriority(Job.SHORT);
 		job.schedule(); // start as soon as possible
+		waitForResponse();
+	}
+	private void waitForResponse() {
 		int i =0;
 		while(problem.isEmpty()) {
 			setTitle("Bunnies: "+i);
